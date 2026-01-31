@@ -1,0 +1,34 @@
+stages:
+  - triggers
+
+build_dmz:
+  stage: triggers
+  trigger:
+    include: dmz/.gitlab/.gitlab-ci.yml
+  rules:
+    - changes:
+        - "dmz/terraform/*.tf"
+
+build_infra:
+  stage: triggers
+  trigger:
+    include: infra/.gitlab/.gitlab-ci.yml
+  rules:
+    - changes:
+        - "infra/terraform/*.tf"
+
+build_dev:
+  stage: triggers
+  trigger:
+    include: dev/.gitlab/.gitlab-ci.yml
+  rules:
+    - changes:
+        - "dev/terraform/*.tf"
+
+build_prd:
+  stage: triggers
+  trigger:
+    include: prd/.gitlab/.gitlab-ci.yml
+  rules:
+    - changes:
+        - "prd/terraform/*.tf"
