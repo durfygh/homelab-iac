@@ -7,7 +7,7 @@ build_dmz:
     include: dmz/.gitlab/.gitlab-ci.yml
   rules:
     - changes:
-        - "dmz/terraform/*.tf"
+        - "dmz/*.tf"
 
 build_infra:
   stage: triggers
@@ -15,7 +15,7 @@ build_infra:
     include: infra/.gitlab/.gitlab-ci.yml
   rules:
     - changes:
-        - "infra/terraform/*.tf"
+        - "infra/*.tf"
 
 build_dev:
   stage: triggers
@@ -23,7 +23,7 @@ build_dev:
     include: dev/.gitlab/.gitlab-ci.yml
   rules:
     - changes:
-        - "dev/terraform/*.tf"
+        - "dev/*.tf"
 
 build_prd:
   stage: triggers
@@ -31,4 +31,4 @@ build_prd:
     include: prd/.gitlab/.gitlab-ci.yml
   rules:
     - changes:
-        - "prd/terraform/*.tf"
+        - "prd/*.tf"

@@ -4,7 +4,7 @@ stages:
   - destroy
 
 variables:
-  WORKDIR: $CI_PROJECT_DIR/infra/terraform
+  WORKDIR: $CI_PROJECT_DIR/infra
   GITLAB_TF_ADDRESS: ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/terraform/state/infra
 
 image:
@@ -33,7 +33,7 @@ format:
     - tofu fmt -diff -check -write=false
   rules:
     - changes:
-        - "infra/terraform/*.tf"
+        - "infra/*.tf"
 
 validate:
   stage: .pre
@@ -43,7 +43,7 @@ validate:
     - tofu validate
   rules:
     - changes:
-        - "infra/terraform/*.tf"
+        - "infra/*.tf"
 
 plan-infrastructure:
   stage: plan
@@ -64,7 +64,7 @@ plan-infrastructure:
   needs: ["validate","format"]
   rules:
     - changes:
-        - "infra/terraform/*.tf"
+        - "infra/*.tf"
 
 apply-infrastructure:
   stage: apply
@@ -76,7 +76,7 @@ apply-infrastructure:
     - tofu apply -auto-approve $ARGUMENTS
   rules:
     - changes:
-        - "infra/terraform/*.tf"
+        - "infra/*.tf"
       when: manual
   needs: ["plan-infrastructure"]
 
@@ -90,6 +90,6 @@ destroy-infrastructure:
     - tofu destroy -auto-approve $ARGUMENTS
   rules:
     - changes:
-        - "infra/terraform/*.tf"
+        - "infra/*.tf"
       when: manual
   needs: ["plan-infrastructure"]

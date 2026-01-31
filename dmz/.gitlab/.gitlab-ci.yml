@@ -4,7 +4,7 @@ stages:
   - destroy
 
 variables:
-  WORKDIR: $CI_PROJECT_DIR/dmz/terraform
+  WORKDIR: $CI_PROJECT_DIR/dmz
   GITLAB_TF_ADDRESS: ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/terraform/state/dmz
 
 image:
@@ -33,7 +33,7 @@ format:
     - tofu fmt -diff -check -write=false
   rules:
     - changes:
-        - "dmz/terraform/*.tf"
+        - "dmz/*.tf"
 
 validate:
   stage: .pre
@@ -43,7 +43,7 @@ validate:
     - tofu validate
   rules:
     - changes:
-        - "dmz/terraform/*.tf"
+        - "dmz/*.tf"
 
 plan-dmz-infrastructure:
   stage: plan
@@ -64,7 +64,7 @@ plan-dmz-infrastructure:
   needs: ["validate","format"]
   rules:
     - changes:
-        - "dmz/terraform/*.tf"
+        - "dmz/*.tf"
 
 apply-dmz-infrastructure:
   stage: apply
@@ -76,7 +76,7 @@ apply-dmz-infrastructure:
     - tofu apply -auto-approve $ARGUMENTS
   rules:
     - changes:
-        - "dmz/terraform/*.tf"
+        - "dmz/*.tf"
       when: manual
   needs: ["plan-dmz-infrastructure"]
 
@@ -90,6 +90,6 @@ destroy-dmz-infrastructure:
     - tofu destroy -auto-approve $ARGUMENTS
   rules:
     - changes:
-        - "dmz/terraform/*.tf"
+        - "dmz/*.tf"
       when: manual
   needs: ["plan-dmz-infrastructure"]
