@@ -55,4 +55,14 @@ locals {
     node   = ["mothership"]
     ip     = ["20"]
   }
+  matrix = {
+    tags   = "matrix"
+    count  = 1
+    name   = ["matrix"]
+    cores  = 2
+    memory = "4096"
+    drive  = 60
+    node   = ["vanguard"]
+    ip     = ["21"]
+  }
 }
