@@ -74,7 +74,7 @@ locals {
     cores   = 2
     memory  = "2048"
     drive   = 20
-    storage = "cache-domains"
+    storage = "local"
     node    = ["mothership", "overlord", "vanguard"]
     ip      = ["41", "42", "43"]
   }
