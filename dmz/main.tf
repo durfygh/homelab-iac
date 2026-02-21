@@ -46,7 +46,7 @@ locals {
     ip     = ["21", "22", "23"]
   }
   openVPN = {
-    tags   = "openVPN"
+    tags   = "openvpn"
     count  = 1
     name   = ["openVPN"]
     cores  = 2
